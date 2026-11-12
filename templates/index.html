@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="wrap">
+    <h1>Understand your heart disease risk</h1>
+    <p>Answer 11 questions using your medical reports. A machine learning model trained on a clinical dataset of 918 patients estimates whether your risk looks lower or higher. Not sure what a term means? Each question links to a plain-language <a class="link" href="{{ url_for('guide') }}">guide</a>.</p>
+  </div>
+  <div class="ecg" aria-hidden="true">
+    <canvas id="ecg"></canvas>
+    <div class="readout"><span><b id="roHr">72</b> bpm</span><span>ST <b id="roSt">0.0</b> mm</span><em id="roNote">preview</em></div>
+  </div>
+  <p class="wrap cap">Illustration only. This heart trace changes as you enter your peak heart rate, ST depression and ST slope.</p>
+</section>
+
+<main class="wrap">
+<form id="predictForm" novalidate>
+ <div class="sheet">
+
+  <section class="sec">
+    <div class="lead"><h2>About you</h2><p>Basic details.</p></div>
+    <div class="fields">
+      <div class="field">
+        <div class="lab"><label for="Age">Age</label></div>
+        <div class="num"><input type="number" id="Age" name="Age" min="1" max="120" step="1" inputmode="numeric"><span>years</span></div>
+        <small class="err"></small>
+      </div>
+      <div class="field" role="radiogroup" aria-labelledby="l-gender">
+        <div class="lab"><span id="l-gender">Gender</span></div>
+        <div class="seg c2">
+          <label class="opt"><input type="radio" name="Gender" value="M"><span>Male</span></label>
+          <label class="opt"><input type="radio" name="Gender" value="F"><span>Female</span></label>
+        </div>
+        <small class="err"></small>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="lead"><h2>Blood pressure and blood tests</h2><p>From a blood pressure reading and your lab report.</p></div>
+    <div class="fields">
+      <div class="field">
+        <div class="lab"><label for="RestingBP">Blood pressure at rest</label><a class="link" href="{{ url_for('guide') }}#blood-pressure" target="_blank" rel="noopener">What is this?</a></div>
+        <div class="num"><input type="number" id="RestingBP" name="RestingBP" min="50" max="250" step="1" inputmode="numeric"><span>mm Hg</span></div>
+        <small class="hint">The top number (systolic) of a blood pressure reading.</small>
+        <small class="err"></small>
+      </div>
+      <div class="field">
+        <div class="lab"><label for="Cholesterol">Total cholesterol</label><a class="link" href="{{ url_for('guide') }}#cholesterol" target="_blank" rel="noopener">What is this?</a></div>
+        <div class="num"><input type="number" id="Cholesterol" name="Cholesterol" min="80" max="700" step="1" inputmode="numeric"><span>mg/dL</span></div>
+        <label class="check"><input type="checkbox" id="cholUnknown"> I don't have this result</label>
+        <small class="err"></small>
+      </div>
+      <div class="field wide" role="radiogroup" aria-labelledby="l-fbs">
+        <div class="lab"><span id="l-fbs">Is your fasting blood sugar above 120 mg/dL?</span><a class="link" href="{{ url_for('guide') }}#fasting-sugar" target="_blank" rel="noopener">What is this?</a></div>
+        <div class="seg c2">
+          <label class="opt"><input type="radio" name="FastingBS" value="1"><span>Yes</span></label>
+          <label class="opt"><input type="radio" name="FastingBS" value="0"><span>No</span></label>
+        </div>
+        <small class="hint">Measured after at least 8 hours without food.</small>
+        <small class="err"></small>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="lead"><h2>Chest pain</h2><p>What you feel in your chest.</p></div>
+    <div class="fields">
+      <div class="field wide" role="radiogroup" aria-labelledby="l-cp">
+        <div class="lab"><span id="l-cp">Which best describes your chest pain?</span><a class="link" href="{{ url_for('guide') }}#chest-pain" target="_blank" rel="noopener">What is this?</a></div>
+        <div class="seg c2 tall">
+          <label class="opt"><input type="radio" name="ChestPainType" value="TA"><span><b>Pressure or tightness with effort, eased by rest</b><small>Medical term: typical angina</small></span></label>
+          <label class="opt"><input type="radio" name="ChestPainType" value="ATA"><span><b>Discomfort that only partly fits that pattern</b><small>Medical term: atypical angina</small></span></label>
+          <label class="opt"><input type="radio" name="ChestPainType" value="NAP"><span><b>Pain that is probably not from the heart</b><small>Medical term: non-anginal pain</small></span></label>
+          <label class="opt"><input type="radio" name="ChestPainType" value="ASY"><span><b>I have no chest pain</b><small>Medical term: asymptomatic</small></span></label>
+        </div>
+        <small class="err"></small>
+      </div>
+      <div class="field wide" role="radiogroup" aria-labelledby="l-ea">
+        <div class="lab"><span id="l-ea">Do you get chest pain when you exercise?</span><a class="link" href="{{ url_for('guide') }}#exercise-chest-pain" target="_blank" rel="noopener">What is this?</a></div>
+        <div class="seg c2">
+          <label class="opt"><input type="radio" name="ExerciseAngina" value="Y"><span>Yes</span></label>
+          <label class="opt"><input type="radio" name="ExerciseAngina" value="N"><span>No</span></label>
+        </div>
+        <small class="err"></small>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="lead"><h2>Heart tracing and treadmill test</h2><p>From your ECG and stress test (treadmill) reports.</p></div>
+    <div class="fields">
+      <div class="field wide" role="radiogroup" aria-labelledby="l-ecg">
+        <div class="lab"><span id="l-ecg">Resting ECG result</span><a class="link" href="{{ url_for('guide') }}#resting-ecg" target="_blank" rel="noopener">What is this?</a></div>
+        <div class="seg c3 tall">
+          <label class="opt"><input type="radio" name="RestingECG" value="Normal"><span><b>Normal</b><small>No problems seen</small></span></label>
+          <label class="opt"><input type="radio" name="RestingECG" value="ST"><span><b>Minor wave changes</b><small>ST-T abnormality</small></span></label>
+          <label class="opt"><input type="radio" name="RestingECG" value="LVH"><span><b>Thickened heart wall</b><small>Left ventricular hypertrophy</small></span></label>
+        </div>
+        <small class="err"></small>
+      </div>
+      <div class="field">
+        <div class="lab"><label for="MaxHR">Highest heart rate reached</label><a class="link" href="{{ url_for('guide') }}#max-heart-rate" target="_blank" rel="noopener">What is this?</a></div>
+        <div class="num"><input type="number" id="MaxHR" name="MaxHR" min="50" max="250" step="1" inputmode="numeric"><span>beats/min</span></div>
+        <small class="hint">During the treadmill stress test.</small>
+        <small class="err"></small>
+      </div>
+      <div class="field">
+        <div class="lab"><label for="Oldpeak">Heart tracing dip during exercise</label><a class="link" href="{{ url_for('guide') }}#st-depression" target="_blank" rel="noopener">What is this?</a></div>
+        <div class="num"><input type="number" id="Oldpeak" name="Oldpeak" min="-3" max="7" step="0.1" inputmode="decimal"><span>mm</span></div>
+        <small class="hint">Reported as "ST depression". Enter 0 if there was none.</small>
+        <small class="err"></small>
+      </div>
+      <div class="field wide" role="radiogroup" aria-labelledby="l-slope">
+        <div class="lab"><span id="l-slope">Direction of the tracing at peak exercise</span><a class="link" href="{{ url_for('guide') }}#st-slope" target="_blank" rel="noopener">What is this?</a></div>
+        <div class="seg c3">
+          <label class="opt"><input type="radio" name="ST_Slope" value="Up"><span><svg viewBox="0 0 40 24"><path d="M4 19 L36 5"/></svg>Rising</span></label>
+          <label class="opt"><input type="radio" name="ST_Slope" value="Flat"><span><svg viewBox="0 0 40 24"><path d="M4 12 L36 12"/></svg>Flat</span></label>
+          <label class="opt"><input type="radio" name="ST_Slope" value="Down"><span><svg viewBox="0 0 40 24"><path d="M4 5 L36 19"/></svg>Falling</span></label>
+        </div>
+        <small class="hint">Reported as "ST slope": upsloping, flat or downsloping.</small>
+        <small class="err"></small>
+      </div>
+    </div>
+  </section>
+ </div>
+
+ <div class="bar">
+   <div class="prog"><span id="progText">0 of 11 answered</span><div class="track"><i id="progBar"></i></div></div>
+   <button type="reset" class="btn ghost" id="resetBtn">Clear</button>
+   <button type="submit" class="btn solid" id="submitBtn">Check my risk</button>
+ </div>
+</form>
+<section id="result" class="result" hidden aria-live="polite"></section>
+</main>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/app.js') }}"></script>{% endblock %}

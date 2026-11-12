@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}CardioVance{% endblock %}</title>
+<meta name="description" content="Estimate your heart disease risk from your medical reports, with plain-language explanations of every term.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;700;800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<header class="top wrap">
+  <a class="brand" href="{{ url_for('index') }}">CardioVance</a>
+  <nav>
+    <a href="{{ url_for('index') }}" {% if active == 'predict' %}aria-current="page"{% endif %}>Risk check</a>
+    <a href="{{ url_for('guide') }}" {% if active == 'guide' %}aria-current="page"{% endif %}>Guide</a>
+  </nav>
+</header>
+{% if not_found %}
+<main class="wrap notfound"><h1>Page not found</h1><p><a class="link" href="{{ url_for('index') }}">Back to the risk check</a></p></main>
+{% else %}{% block content %}{% endblock %}{% endif %}
+<footer class="wrap foot">
+  Educational project. This tool gives a statistical estimate, not a medical diagnosis. Always talk to a doctor about your health.
+</footer>
+{% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% block title %}Guide to the terms | CardioVance{% endblock %}
+{% block content %}
+<main class="wrap">
+  <div class="ghead">
+    <h1>Guide to the terms</h1>
+    <p>Every question on the risk check explained in plain language: what it means, how it is measured, what the usual ranges are and what to enter. The ranges are general reference values, not a diagnosis.</p>
+  </div>
+
+  <div class="guide">
+    <nav class="toc" aria-label="Topics">
+      <a href="#where">Where to find your numbers</a>
+      <a href="#blood-pressure">Blood pressure at rest</a>
+      <a href="#cholesterol">Total cholesterol</a>
+      <a href="#fasting-sugar">Fasting blood sugar</a>
+      <a href="#chest-pain">Chest pain type</a>
+      <a href="#exercise-chest-pain">Chest pain during exercise</a>
+      <a href="#resting-ecg">Resting ECG</a>
+      <a href="#max-heart-rate">Highest heart rate</a>
+      <a href="#st-depression">ST depression</a>
+      <a href="#st-slope">ST slope</a>
+      <a href="#glossary">Glossary</a>
+    </nav>
+
+    <div class="gbody">
+      <article class="topic" id="where">
+        <h2>Where to find your numbers</h2>
+        <p>Most values come from one of four places. If you are missing a report, ask your doctor or a clinic to arrange the test.</p>
+        <table>
+          <tr><th>Value</th><th>Where it comes from</th></tr>
+          <tr><td>Blood pressure</td><td>A blood pressure check at home, a pharmacy or a clinic</td></tr>
+          <tr><td>Cholesterol, fasting blood sugar</td><td>A blood test report (lipid profile and fasting glucose)</td></tr>
+          <tr><td>Resting ECG</td><td>An ECG report, usually a printout with a short written summary</td></tr>
+          <tr><td>Heart rate, ST depression, ST slope, chest pain on exercise</td><td>A treadmill stress test report (also called TMT)</td></tr>
+        </table>
+      </article>
+
+      <article class="topic" id="blood-pressure">
+        <h2>Blood pressure at rest</h2>
+        <p class="sum">How hard blood pushes against your artery walls while you are relaxed. Unit: mm Hg (millimetres of mercury).</p>
+        <h3>What the two numbers mean</h3>
+        <p>A reading is written like <b>120/80</b>. The top number (systolic) is the pressure when your heart squeezes. The bottom number (diastolic) is the pressure when your heart relaxes between beats. This tool needs <b>only the top number</b>.</p>
+        <h3>How it is measured</h3>
+        <ol>
+          <li>Avoid coffee, smoking and exercise for 30 minutes beforehand.</li>
+          <li>Sit quietly for 5 minutes with your back supported and feet flat on the floor.</li>
+          <li>Rest your arm on a table at heart level, with the cuff on your bare upper arm.</li>
+          <li>Do not talk during the reading.</li>
+          <li>Take two readings, one to two minutes apart, and use the average.</li>
+        </ol>
+        <h3>Usual ranges (top number)</h3>
+        <table>
+          <tr><th>Category</th><th>Systolic</th></tr>
+          <tr><td>Normal</td><td>Below 120</td></tr>
+          <tr><td>Elevated</td><td>120 to 129</td></tr>
+          <tr><td>High, stage 1</td><td>130 to 139</td></tr>
+          <tr><td>High, stage 2</td><td>140 or more</td></tr>
+          <tr><td>Emergency range</td><td>Above 180. Seek medical help right away</td></tr>
+        </table>
+      </article>
+
+      <article class="topic" id="cholesterol">
+        <h2>Total cholesterol</h2>
+        <p class="sum">A fatty substance in your blood. Too much can build up inside arteries and narrow them. Unit: mg/dL.</p>
+        <h3>How it is measured</h3>
+        <p>A blood test called a <b>lipid profile</b>. A nurse takes a small blood sample from your arm. You may be asked to fast for 9 to 12 hours first. The report lists several lines (LDL "bad", HDL "good", triglycerides). Enter the line called <b>Total cholesterol</b>.</p>
+        <p>If your report is in mmol/L, multiply by 38.67 to convert to mg/dL.</p>
+        <h3>Usual ranges</h3>
+        <table>
+          <tr><th>Category</th><th>Total cholesterol</th></tr>
+          <tr><td>Desirable</td><td>Below 200 mg/dL</td></tr>
+          <tr><td>Borderline high</td><td>200 to 239 mg/dL</td></tr>
+          <tr><td>High</td><td>240 mg/dL or more</td></tr>
+        </table>
+        <h3>If you do not have this result</h3>
+        <p>Tick "I don't have this result". The model then uses an average value, so the estimate will be less reliable.</p>
+      </article>
+
+      <article class="topic" id="fasting-sugar">
+        <h2>Fasting blood sugar</h2>
+        <p class="sum">The amount of sugar (glucose) in your blood after not eating. High levels can mean diabetes, which raises heart disease risk.</p>
+        <h3>How it is measured</h3>
+        <p>Do not eat or drink anything except water for at least 8 hours, usually overnight. Then a lab blood test, or a finger-prick glucose meter, measures your glucose. On a report it may appear as <b>FBS</b> or <b>fasting plasma glucose</b>.</p>
+        <h3>Usual ranges</h3>
+        <table>
+          <tr><th>Category</th><th>Fasting glucose</th></tr>
+          <tr><td>Normal</td><td>Below 100 mg/dL</td></tr>
+          <tr><td>Prediabetes</td><td>100 to 125 mg/dL</td></tr>
+          <tr><td>Diabetes</td><td>126 mg/dL or more</td></tr>
+        </table>
+        <h3>What to select</h3>
+        <p>The model asks one simple question: is your fasting value <b>above 120 mg/dL</b>? Choose Yes or No based on your report.</p>
+      </article>
+
+      <article class="topic" id="chest-pain">
+        <h2>Chest pain type</h2>
+        <p class="sum">Doctors group chest pain by how likely it is to come from reduced blood flow to the heart. That kind of pain is called <b>angina</b>.</p>
+        <table>
+          <tr><th>Option on the form</th><th>What it means</th></tr>
+          <tr><td>Pressure or tightness with effort, eased by rest (typical angina)</td><td>A squeezing or heavy feeling in the chest that starts with physical effort or stress and eases within minutes of resting.</td></tr>
+          <tr><td>Discomfort that only partly fits that pattern (atypical angina)</td><td>Feels similar, but does not match every part of the typical pattern.</td></tr>
+          <tr><td>Pain that is probably not from the heart (non-anginal pain)</td><td>Often sharp, or linked to breathing, pressing on the chest or changing position.</td></tr>
+          <tr><td>I have no chest pain (asymptomatic)</td><td>No chest pain at all.</td></tr>
+        </table>
+        <h3>How it is decided</h3>
+        <p>There is no machine for this. A doctor decides by asking when the pain starts, how it feels, how long it lasts and what relieves it. If you are unsure, choose the closest description or ask your doctor.</p>
+        <p class="note">Having no chest pain does not mean your heart is healthy. Heart disease can be silent.</p>
+      </article>
+
+      <article class="topic" id="exercise-chest-pain">
+        <h2>Chest pain during exercise</h2>
+        <p class="sum">Whether physical effort brings on chest pain, pressure or tightness.</p>
+        <p>Answer <b>Yes</b> if you get these feelings while walking fast, climbing stairs or during a treadmill test. Answer <b>No</b> if effort does not bring them on. A stress test report often lists this as "exercise induced angina" or "chest pain during test".</p>
+      </article>
+
+      <article class="topic" id="resting-ecg">
+        <h2>Resting ECG</h2>
+        <p class="sum">An ECG (electrocardiogram) records the electrical signals of your heartbeat. "Resting" means it was taken while you lay still.</p>
+        <h3>How it is measured</h3>
+        <p>You lie down and a technician sticks small pads (electrodes) on your chest, arms and legs. The test takes a few minutes and is painless. The machine prints a wavy line, and the report usually includes a written result.</p>
+        <h3>Options on the form</h3>
+        <table>
+          <tr><th>Option</th><th>What it means</th></tr>
+          <tr><td>Normal</td><td>No concerning pattern was seen.</td></tr>
+          <tr><td>Minor wave changes (ST-T abnormality)</td><td>The ST segment or T wave of the heartbeat looks different from normal, for example inverted or shifted.</td></tr>
+          <tr><td>Thickened heart wall (LVH)</td><td>Left ventricular hypertrophy: the main pumping chamber has thicker muscle, often after years of high blood pressure.</td></tr>
+        </table>
+      </article>
+
+      <article class="topic" id="max-heart-rate">
+        <h2>Highest heart rate reached</h2>
+        <p class="sum">The fastest your heart beat during exercise. Unit: beats per minute (bpm). This is not your resting pulse.</p>
+        <h3>How it is measured</h3>
+        <p>During a <b>treadmill stress test</b> you walk while the speed and slope increase. A heart monitor records your pulse throughout. Look for "Max HR", "Peak HR" or "Maximum heart rate achieved" in the report.</p>
+        <p>A smartwatch reading is only a rough guide and is not the same as a supervised stress test.</p>
+      </article>
+
+      <article class="topic" id="st-depression">
+        <h2>ST depression</h2>
+        <p class="sum">On an ECG, the "ST segment" is a flat stretch between two parts of each heartbeat. If your heart muscle is not getting enough blood during effort, this segment can dip below its normal level. Unit: millimetres (mm).</p>
+        <h3>How it is measured</h3>
+        <p>During the treadmill stress test, the ECG at peak exercise is compared with the resting baseline. The size of the dip is measured in mm. Look for "ST depression" or "ST change" on the report. A bigger number means a bigger dip. If the report shows no dip, enter <b>0</b>.</p>
+      </article>
+
+      <article class="topic" id="st-slope">
+        <h2>ST slope</h2>
+        <p class="sum">The direction the ST segment is heading at peak exercise.</p>
+        <table>
+          <tr><th>Option</th><th>What it means</th></tr>
+          <tr><td>Rising (upsloping)</td><td>The line tilts upward. This is usually a healthy response.</td></tr>
+          <tr><td>Flat</td><td>The line stays level. This can suggest reduced blood flow.</td></tr>
+          <tr><td>Falling (downsloping)</td><td>The line tilts downward. This is the pattern doctors watch most closely.</td></tr>
+        </table>
+        <p>You do not work this out yourself. It is written in the treadmill stress test report as "ST slope".</p>
+      </article>
+
+      <article class="topic" id="glossary">
+        <h2>Glossary</h2>
+        <dl>
+          <dt>Angina</dt><dd>Chest pain or pressure caused by the heart muscle not getting enough blood.</dd>
+          <dt>Artery</dt><dd>A blood vessel that carries blood away from the heart.</dd>
+          <dt>bpm</dt><dd>Beats per minute, the unit for heart rate.</dd>
+          <dt>ECG / EKG</dt><dd>Electrocardiogram, a recording of the heart's electrical activity.</dd>
+          <dt>Fasting</dt><dd>Not eating or drinking anything except water, usually for 8 hours or more.</dd>
+          <dt>LVH</dt><dd>Left ventricular hypertrophy, a thickened wall of the heart's main pumping chamber.</dd>
+          <dt>mg/dL</dt><dd>Milligrams per decilitre, the unit used for cholesterol and blood sugar.</dd>
+          <dt>mm Hg</dt><dd>Millimetres of mercury, the unit for blood pressure.</dd>
+          <dt>Stress test / TMT</dt><dd>A treadmill test that records your heart while you exercise.</dd>
+          <dt>Systolic / diastolic</dt><dd>The top and bottom numbers of a blood pressure reading.</dd>
+        </dl>
+        <p class="note">This guide is for general understanding only. If you have chest pain, shortness of breath or dizziness, seek medical care right away.</p>
+        <p><a class="btn solid inline" href="{{ url_for('index') }}">Go to the risk check</a></p>
+      </article>
+    </div>
+  </div>
+</main>
+{% endblock %}
